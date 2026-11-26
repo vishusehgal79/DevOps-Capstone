@@ -1,3 +1,4 @@
+from prometheus_fastapi_instrumentator import Instrumentator
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Depends, HTTPException
@@ -57,7 +58,7 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan,
 )
-
+Instrumentator().instrument(app).expose(app)
 
 # Health check
 @app.get("/health")
